@@ -14,6 +14,7 @@ class DoubanMovieTop250Spider(Spider):
         yield Request(url, headers=self.headers)
 
     def parse(self, response):
+        print("Hello World")
         item = DoubanItem()
         movies = response.xpath('//ol[@class="grid_view"]/li')
         for movie in movies:
