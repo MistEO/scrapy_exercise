@@ -1,6 +1,10 @@
-from scrapy.spiders import Spider
+# -*- coding: utf-8 -*-
+
 from scrapy import Request
+from scrapy.spiders import Spider
+
 from douban.items import DoubanItem
+
 
 class DoubanMovieTop250Spider(Spider):
     name = 'douban_movie_top250'
@@ -14,7 +18,6 @@ class DoubanMovieTop250Spider(Spider):
         yield Request(url, headers=self.headers)
 
     def parse(self, response):
-        print("Hello World")
         item = DoubanItem()
         movies = response.xpath('//ol[@class="grid_view"]/li')
         for movie in movies:
@@ -27,7 +30,7 @@ class DoubanMovieTop250Spider(Spider):
             # item['intro'] = movie.xpath(
             #     './/div[@class="bd"]/p[@class="quote"]/span/text()').extract()[0]
             yield item
-        next_url = response.xpath('//span[@class="next"]/a/@href').extract()[0]
+        next_url = response.xpath('//span[@class="next"]/a/@href').extract()
         if next_url:
-            next_url = 'https://movie.douban.com/top250' + next_url
+            next_url = 'https://movie.douban.com/top250' + next_url[0]
             yield Request(next_url, headers=self.headers)
