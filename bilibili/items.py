@@ -8,7 +8,11 @@
 import scrapy
 
 
-class ZhihuItem(scrapy.Item):
+class BilibiliItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    title = scrapy.Field()
+    author = scrapy.Field()
+    arcurl = scrapy.Field()
+    play_count = scrapy.Field()
+    danmu_count = scrapy.Field()
     pass
